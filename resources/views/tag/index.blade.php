@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -11,25 +12,21 @@
             <div class="card">
                 <div class="card-header"><center><b>Data Siswa/i SMK ASSALAAM</b></center></div>
                 <div class="card-body">
-                    <a href="{{route('akun.create')}}"class="btn btn-outline-light float-right"><b>Tambah Siswa(+)</b></a>
+                    <a href="{{route('tag.create')}}"class="btn btn-outline-light float-right"><b>Tambah Hobi(+)</b></a>
                     <table class="table">
                         <thead>
-                            <th>Nama</th>
-                            <th>Email</th>
-                            <th>Telepon</th>
+                            <th>Jenis Tag</th>
                             <th>Aksi</th>
                         </thead>
                         <tbody>
-                            @foreach ($akun as $item)
+                            @foreach ($tag as $item)
                             <tr>
-                                <td>{{$item->nama}}</td>
-                                <td>{{$item->email}}</td>
-                                <td>{{$item->tlpn}} </td>
-                            <form action="{{route('akun.destroy', $item->id)}}" method="post">
+                                <td>{{$item->tag}}</td>
+                            <form action="{{route('tag.destroy', $item->id)}}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <td><a class="btn btn-primary" href="{{route('akun.show', $item->id)}}">Lihat</a>|
-                                <a class="btn btn-warning" href="{{route('akun.edit', $item->id)}}">Edit</a>|
+                                <td><a class="btn btn-primary" href="{{route('tag.show', $item->id)}}">Lihat</a>|
+                                <a class="btn btn-warning" href="{{route('tag.edit', $item->id)}}">Edit</a>|
                                 <button type="submit" class="btn btn-danger">Hapus</button>
                                 </tr>
                                 </td>

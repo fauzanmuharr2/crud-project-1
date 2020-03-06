@@ -13,32 +13,29 @@
                         <center><b>PROFIL</b></center>
                     </div>
                     <div class="card-body">
-                    <a href="{{route('profil.create')}}"class="btn btn-outline-light float-right"><b>Tambah Tabungan Siswa(+)</b></a>
+                    <a href="{{route('group.create')}}"class="btn btn-outline-light float-right"><b>Tambah Tabungan Siswa(+)</b></a>
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Nomor</th>
                                         <th>Nama</th>
-                                        <th>No Telepon</th>
-                                        <th>Alamat</th>
+                                        <th>Email</th>
+                                        <th>Nama Grup</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @php    $no = 1;    @endphp
-                                    @foreach ($profil as $data)
+                                    @foreach ($group as $data)
                                         <tr>
-                                            <td>{{$no++}}</td>
                                             <td>{{$data->akun->nama}}</td>
-                                            <td>{{$data->akun->tlpn}}</td>
-                                            <td>{{$data->alamat}}</td>
-                                            <form action="{{route('profil.destroy', $data->id)}}" method="post">
+                                            <td>{{$data->akun->email}}</td>
+                                            <td>{{$data->nama_grup}}</td>
+                                            <form action="{{route('group.destroy', $data->id)}}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                             <td>
-                                            <a class="btn btn-primary" href="{{route('profil.show', $data->id)}}">Lihat</a>|
-                                            <a class="btn btn-warning" href="{{route('profil.edit', $data->id)}}">Edit</a>|
+                                            <a class="btn btn-primary" href="{{route('group.show', $data->id)}}">Lihat</a>|
+                                            <a class="btn btn-warning" href="{{route('group.edit', $data->id)}}">Edit</a>|
                                             <button type="submit" class="btn btn-danger">Hapus</button>
                                             </td>
                                         </tr>

@@ -1,64 +1,68 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Profil;
+use App\Akun;
 use Illuminate\Http\Request;
+use App\DB;
 
 class ProfilController extends Controller
 {
-
     public function index()
     {
-        $profil = Profil::all();
+        $profil = Profil::with('akun')->get();
         return view('profil.index', compact('profil'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
-        $profil = Profil::all();
-        return view('profil.create' ,compact('profil'));
+
+        $akun = Akun::all();
+        return view('profil.create', compact('akun'));
     }
 
     public function store(Request $request)
     {
         $profil = new Profil;
-        $profil->nama = $request->nama;
-        $profil->tgl_lahir = $request->tgl_lahir;
+        $profil->akun_id = $request->akun_id;
         $profil->alamat = $request->alamat;
-        $profil->no_tlp = $request->no_tlp;
         $profil->save();
         return redirect()->route('profil.index')->with(['message' => 'Data profil Berhasil disimpan']);
     }
 
-    public function show($edit)
+
+    public function show($id)
     {
         $profil = Profil::findOrFail($id);
         return view('profil.show', compact('profil'));
     }
 
-    public function edit($edit)
+    public function edit($id)
     {
         $profil = Profil::findOrFail($id);
-        return view('profil.edit', compact('profil'));
+        $akun = Akun::all();
+        return view('profil.edit', compact('profil', 'akun'))->with(['message' => 'Data profil Berhasil diedit']);
     }
 
-    public function update(Request $request, $edit)
+    public function update(Request $request, $id)
     {
         $profil = Profil::findOrFail($id);
-        $profil->nama = $request->nama;
-        $profil->tgl_lahir = $request->tgl_lahir;
+        $profil->akun_id = $request->akun_id;
         $profil->alamat = $request->alamat;
-        $profil->no_tlp = $request->no_tlp;
         $profil->save();
         return redirect()->route('profil.index')->with(['message' => 'Data profil Berhasil disimpan']);
     }
 
-    public function destroy($edit)
-    {
-
-        $profil = Profil::findOrFail($id);
-        $profil->delete();
-        return redirect()->route('profil.index')->with(['message' => 'Data profil Berhasil dihapus']);
+    public function destroy($id)
+        {
+            $profil = Profil::findOrFail($id);
+            $profil->delete();
+            return redirect()->route('profil.index')
+                ->with(['message' => 'Data profil Berhasil diHapus']);
     }
 }

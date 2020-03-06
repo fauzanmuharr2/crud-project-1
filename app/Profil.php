@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Profil extends Model
 {
-    protected $fillable = ['nama','tgl_lahir','alamat','no_tlp','id_akun'];
+    protected $fillable = ['akun_id','alamat'];
     public $timestamps = true;
+
+    public function akun()
+    {
+        return $this->belongsTo('App\Akun','akun_id');
+    }
+
 }

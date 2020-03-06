@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGroupsTable extends Migration
+class CreateProfilsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('groups', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama_grup');
-            $table->string('anggota');
+        Schema::create('profils', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('akun_id');
+            $table->foreign('akun_id')->references('id')->on('akuns')->onDelete('cascade');
+            $table->string('alamat')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('groups');
+        Schema::dropIfExists('profils');
     }
 }

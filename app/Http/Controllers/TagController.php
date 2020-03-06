@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Tag;
 use Illuminate\Http\Request;
+use App\Tag;
 
 class TagController extends Controller
 {
@@ -15,8 +15,7 @@ class TagController extends Controller
 
     public function create()
     {
-        $tag = Tag::all();
-        return view('tag.create' ,compact('tag'));
+        return view('tag.create');
     }
 
     public function store(Request $request)
@@ -27,19 +26,19 @@ class TagController extends Controller
         return redirect()->route('tag.index')->with(['message' => 'Data tag Berhasil disimpan']);
     }
 
-    public function show($edit)
+    public function show($id)
     {
         $tag = Tag::findOrFail($id);
         return view('tag.show', compact('tag'));
     }
 
-    public function edit($edit)
+    public function edit($id)
     {
         $tag = Tag::findOrFail($id);
         return view('tag.edit', compact('tag'));
     }
 
-    public function update(Request $request, $edit)
+    public function update(Request $request, $id)
     {
         $tag = Tag::findOrFail($id);
         $tag->tag = $request->tag;
@@ -47,9 +46,8 @@ class TagController extends Controller
         return redirect()->route('tag.index')->with(['message' => 'Data tag Berhasil disimpan']);
     }
 
-    public function destroy($edit)
+    public function destroy($id)
     {
-
         $tag = Tag::findOrFail($id);
         $tag->delete();
         return redirect()->route('tag.index')->with(['message' => 'Data tag Berhasil dihapus']);

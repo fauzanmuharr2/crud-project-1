@@ -15,7 +15,15 @@ class CreateTagsTable extends Migration
     {
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
-            $table->string('tag');
+            $table->string('tag')->nullable();
+            $table->timestamps();
+        });
+        Schema::create('postingan_tag', function (Blueprint $table) {
+            $table->unsignedBigInteger('postingan_id');
+            $table->unsignedBigInteger('tag_id');
+
+            $table->foreign('postingan_id')->references('id')->on('postingans');
+            $table->foreign('tag_id')->references('id')->on('tags');
             $table->timestamps();
         });
     }

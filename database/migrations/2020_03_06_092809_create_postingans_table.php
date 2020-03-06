@@ -14,12 +14,11 @@ class CreatePostingansTable extends Migration
     public function up()
     {
         Schema::create('postingans', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->bigInteger('akun_id')->unsigned();
+            $table->foreign('akun_id')->references('id')->on('akuns')->onDelete('cascade');
             $table->string('deskripsi');
-            $table->string('foto');
-            $table->unsignedBigInteger('id_add_field_postingan');
-            $table->foreign('id_add_field_postingan')->references('id')
-            ->on('add_field_postingans')->onDelete('cascade');
+            $table->string('kategori');
             $table->timestamps();
         });
     }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAddFieldPostingans extends Migration
+class CreateAkunsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateAddFieldPostingans extends Migration
      */
     public function up()
     {
-        Schema::create('add_field_postingans', function (Blueprint $table) {
+        Schema::create('akuns', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_tag');
-            $table->foreign('id_tag')->references('id')
-            ->on('tags')->onDelete('cascade');
+            $table->string('nama')->nullable();
+            $table->string('tlpn')->nullable();
+            $table->string('email')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateAddFieldPostingans extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('add_field_postingans');
+        Schema::dropIfExists('akuns');
     }
 }
