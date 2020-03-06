@@ -10,7 +10,7 @@
                     @endif
                 <div class="card">
                     <div class="card-header">
-                        <center><b>PROFIL</b></center>
+                        <center><b>HOME PROFIL</b></center>
                     </div>
                     <div class="card-body">
                     <a href="{{route('postingan.create')}}"class="btn btn-outline-light float-right"><b>Tambah Tabungan Siswa(+)</b></a>

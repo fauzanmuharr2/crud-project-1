@@ -55,7 +55,7 @@ class GroupController extends Controller
         $group->akun_id = $request->akun_id;
         $group->nama_grup = $request->nama_grup;
         $group->save();
-        return redirect()->route('grup.index')->with(['message' => 'Data group Berhasil disimpan']);
+        return redirect()->route('group.index')->with(['message' => 'Data group Berhasil disimpan']);
     }
 
     public function destroy($id)

@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Lihat Data Siswa</div>
+                <div class="card-header"><center>Lihat Data Siswa</center></div>
 
                 {{-- <div class="card-body">
                     @if (session('status'))
@@ -14,30 +14,27 @@
                         </div>
                     @endif --}}
 
-                           <div class="row">
-                                <div class="col-md-6">
-                                    <label for="">Nama</label>
+                            <div class="row ">
+                                <div class="col-md-5">
+                                    <label for=""><b>Nama</b></label>
                                 </div>
                                 <div class="col-md-12">
-                                    <input type="text" class="form-control" value="{{$profil->nama}}" name="nama" readonly>
+                                <input type="text" class="form-control" value="{{$profil->akun->nama}}" name="nama" readonly>
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="">Tanggal Lahir</label>
-                                </div>
-                                <div class="col-md-12">
-                                    <input type="date" class="form-control" value="{{$profil->tgl_lahir}}" name="tgl_lahir" readonly>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="">Alamat</label>
+                                <div class="col-md-5">
+                                    <label for=""><b>No Telepon</b></label>
                                 </div>
                                 <div class="col-md-12">
-                                <textarea name="alamat" cols="10" rows="5" class="form-control">{{$profil->alamat}}</textarea>
+                                <input type="text" class="form-control" value="{{$profil->akun->tlpn}}" name="kelas" readonly>
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="">No Telepon</label>
+                                <div class="col-md-5">
+                                    <label for=""><b>Alamat</b></label>
                                 </div>
                                 <div class="col-md-12">
-                                    <input type="number" class="form-control" value="{{$profil->no_tlp}}" name="no_tlp" readonly>
+                                    <textarea name="alamat" id="" cols="30" rows="10" readonly> {{$profil->alamat}} </textarea>
+                                    <div class="form-group">
+                                    <a href="{{route('profil.index')}}"class="btn btn-outline-danger float-right"><b>Kembali(-)</b></a>
+                                </div>
                                 </div>
                             </div>
                 </div>
