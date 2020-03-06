@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Postingan;
 use App\Akun;
+use App\Tag;
 use Illuminate\Http\Request;
 use App\DB;
 
@@ -23,7 +24,8 @@ class PostinganController extends Controller
     {
 
         $akun = Akun::all();
-        return view('postingan.create', compact('akun'));
+        $tag = Tag::all();
+        return view('postingan.create', compact('akun','tag'));
     }
 
     public function store(Request $request)
@@ -33,6 +35,7 @@ class PostinganController extends Controller
         $postingan->deskripsi = $request->deskripsi;
         $postingan->kategori = $request->kategori;
         $postingan->save();
+        $postingan->tag()->attach($request->tag);
         return redirect()->route('postingan.index')->with(['message' => 'Data postingan Berhasil disimpan']);
     }
 
@@ -47,7 +50,9 @@ class PostinganController extends Controller
     {
         $postingan = Postingan::findOrFail($id);
         $akun = Akun::all();
-        return view('postingan.edit', compact('postingan', 'akun'))->with(['message' => 'Data postingan Berhasil diedit']);
+        $select = $postingan->tag->pluck('id')->toArray();
+        $tag = Tag::all();
+        return view('postingan.edit', compact('postingan', 'akun','select','tag'))->with(['message' => 'Data postingan Berhasil diedit']);
     }
 
     public function update(Request $request, $id)
@@ -57,12 +62,14 @@ class PostinganController extends Controller
         $postingan->deskripsi = $request->deskripsi;
         $postingan->kategori = $request->kategori;
         $postingan->save();
+        $postingan->tag()->sync($request->tag);
         return redirect()->route('postingan.index')->with(['message' => 'Data postingan Berhasil disimpan']);
     }
 
     public function destroy($id)
         {
             $postingan = Postingan::findOrFail($id);
+            $postingan->tag()->detach();
             $postingan->delete();
             return redirect()->route('postingan.index')
                 ->with(['message' => 'Data postingan Berhasil diHapus']);

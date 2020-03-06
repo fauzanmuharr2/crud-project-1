@@ -23,12 +23,4 @@ class Akun extends Model
     {
         return $this->hasMany('App\Postingan','akun_id');
     }
-
-    public function tag()
-    {
-        return $this->belongsToMany('App\Tag',
-                                    'postingan_tag',
-                                    'id_postingan',
-                                    'id_tag');
-    }
 }

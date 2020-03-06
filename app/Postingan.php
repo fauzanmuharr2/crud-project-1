@@ -17,7 +17,7 @@ class Postingan extends Model
     public function tag()
     {
         return $this->belongsToMany('App\Tag',
-                                    'postingan_tags',
+                                    'postingan_tag',
                                     'postingan_id',
                                     'tag_id');
     }

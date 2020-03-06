@@ -21,6 +21,7 @@
                                         <th>Nama</th>
                                         <th>Deskripsi</th>
                                         <th>Kategori</th>
+                                        <th>Tag</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -30,6 +31,11 @@
                                             <td>{{$data->akun->nama}}</td>
                                             <td>{{$data->deskripsi}}</td>
                                             <td>{{$data->kategori}}</td>
+                                    <td>
+                                        @foreach ($data->tag as $item)
+                                            <li>{{$item->tag}}</li>
+                                        @endforeach
+                                    </td>
                                             <form action="{{route('postingan.destroy', $data->id)}}" method="post">
                                                 @csrf
                                                 @method('DELETE')

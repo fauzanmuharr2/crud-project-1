@@ -12,7 +12,7 @@ class Tag extends Model
     public function postingan()
     {
         return $this->belongsToMany('App\Postingan',
-                                    'postingan_tags',
+                                    'postingan_tag',
                                     'tag_id',
                                     'postingan_id');
     }
